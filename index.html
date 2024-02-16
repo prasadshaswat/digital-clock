@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    #digital-clock {
+      font-size: 10em;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+      font-family: "Protest Strike", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(to right, #00416A, #E4E5E6);
+      /* Adjust colors as needed */
+    }
+  </style>
+  <title>Digital Clock with Video Background</title>
+</head>
+
+<body>
+
+  <video autoplay muted loop>
+    <source src="mixkit glass hourglass close up on a black background 28889.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div id="digital-clock"></div>
+
+  <script>
+    function updateClock() {
+      var currentTime = new Date();
+      var hours = currentTime.getHours();
+      var minutes = currentTime.getMinutes();
+      var seconds = currentTime.getSeconds();
+      var meridiem = hours >= 12 ? 'PM' : 'AM';
+
+      // Convert to 12-hour format
+      hours = (hours % 12) || 12;
+
+      // Add leading zero if the number is less than 10
+      hours = (hours < 10 ? "0" : "") + hours;
+      minutes = (minutes < 10 ? "0" : "") + minutes;
+      seconds = (seconds < 10 ? "0" : "") + seconds;
+
+      var timeString = hours + ":" + minutes + ":" + seconds + ' ' + meridiem;
+
+      var digitalClockElement = document.getElementById("digital-clock");
+      digitalClockElement.innerText = timeString;
+      digitalClockElement.style.opacity = 1;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+</body>
+
+</html>
